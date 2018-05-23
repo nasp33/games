@@ -1,0 +1,187 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+li{
+	list-style-type: none;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+body{
+	min-width:1000px;
+}
+body{
+	color: Grey;
+	background: rgba(233,233,233,0.5);
+	font-family: '微软雅黑'
+}
+/****************header**********************/
+.header{
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	background: white;
+	/*float: left;*/
+}
+.header-all div{
+	float: left;
+}
+.header-items li{
+	float: left;
+	color: Grey;
+	font-size: 14px;
+}
+.yimai-logo{
+	/*background: green;*/
+	padding: 17px 0px;
+	/*margin-left: 285px;*/
+}
+.yimai-logo img{
+	display: block;
+}
+.header-all{
+	width: 1000px;
+	margin: 0 auto;
+}
+.first-page{
+	margin-left: 150px;
+}
+.header-items li{
+	padding: 0px 20px;
+}
+.header-items li:hover{
+	background: #D1141B;
+	color: white;
+}
+.nav div{
+	background-position: 50%;
+	height: 285px;
+
+}
+.nav>.nav-img1~div{
+	display: none;
+}
+.nav-img1{
+	background: url('img/banner1.jpg');
+	/*width: 100%;*/	
+}
+.nav-img2{
+	background: url('img/banner2.jpg');
+}
+.nav-img3{
+	background: url('img/banner3.jpg');
+}
+.nav-img4{
+	background: url('img/banner4.jpg');
+}
+.nav-img5{
+	background: url('img/banner5.jpg');
+}
+.nav-img6{
+	background: url('img/banner6.jpg');
+}
+.nav-img7{
+	background: url('img/banner7.jpg');
+}
+.nav-img8{
+	background: url('img/banner8.jpg');
+}
+.section{
+	/*height: 800px;*/
+	width: 1000px;
+	/*background: green;*/
+	margin: 30px auto 0px auto;
+}
+#yimai-introduct {
+	/*background: blue;*/
+	float: left;
+}
+#yimai-introduct a{
+	display: block;
+	width: 228px;
+	height: 42px;
+	line-height: 42px;
+	text-align: center;
+	background: white;
+	margin-bottom: 10px;	
+}
+/*#yimai-introduct a:hover{
+	background: #D1141B;
+	color: white;	
+}*/
+#yimai-introduct .active{
+	background: #D1141B;
+	color: white;	
+}
+#yimai-introduct li>a{
+	color: Grey;
+}
+#introduct-content{
+	/*background: red;*/
+	width: 700px;
+	float: right;
+	padding: 10px;
+}
+#introduct-content div{
+	width: 570px;
+	/*border: 1px solid green;*/
+	padding-right: 8em;
+	background: url('img/content_bg.png');
+	background-position: right bottom;
+	background-repeat: no-repeat;
+	/*display: none*/
+}
+#introduct-content>.i-c1~div{
+	display: none;
+}
+#i-c3 img{
+	display: block;
+	width: 500px;
+	/*margin: 0 auto*/
+}
+#i-c4 img{
+	display: block;
+	width: 500px;
+}
+#i-c5 img{
+	display: block;
+	width: 500px;
+}
+i{
+	font-style: normal;
+	border-bottom: 4px solid #D1141B;
+}
+h2{
+	font-size: 30px;
+}
+h2>i{
+	font-size: 24px;
+}
+h3{
+	margin-top: 2em;
+	font-size: 14px;
+	color: #D1141B	
+}
+#introduct-content div>p{
+	margin-top: 2em;
+	font-size: 14px;
+}
+.indent{
+	text-indent: 2em;
+}
+.footer{
+	width: 100%;
+	background: white;
+	height: 50px;
+/*	position: absolute;
+	bottom: 0px;*/
+	float: left;
+	line-height: 50px;
+	text-align: center;
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>配对游戏</title>
+	<style type="text/css">
+	hr{
+			width: 600px;
+			height: 5px;
+			background: orange;
+	}
+	h2{text-align: center;}
+		table{
+			text-align: center;
+			border: 2px;
+			margin: 0px auto 15px;
+			clear: both;
+		}
+		td{
+			background: Pink;
+			width: 100px;
+			height: 100px;
+			border-radius: 10px;
+			border: none;
+			font-weight: bold;
+			font-size: 28px;
+		}
+		div{
+			font-weight: bold;
+			width: 150px;
+			height: 50px;
+			border-radius: 10px;
+			background: red;
+			line-height: 50px;
+			text-align: center;
+			float: left;
+		}
+		footer{
+			width: 520px;
+			margin: 0px auto 15px;
+		}
+		#div1{
+			margin-left: 60px;
+			margin-right: 100px;
+		}
+		#div2{cursor: pointer;}
+	</style>
+</head>
+<body>
+<h2>配对游戏<hr></h2>
+	<table>
+		<script>
+			var cols=5,rows=4;
+			for(var i=0;i<rows;i++){
+				str="<tr>";
+				for(var j=0;j<cols;j++){
+					var sid="img"+((cols*i)+j)
+					str+='<td  id="'+sid+'" onclick="showimg('+((cols*i)+j)+')"'+'>'
+					str+='</td>'
+				}
+				str+="</tr>";
+				document.write(str)
+			}
+		</script>
+	</table>
+	<footer>
+		<div id="div1">0秒</div>
+		<div id="div2" onclick="init()">开始游戏</div>       <!--  为了将div放在table后用二个script -->
+	</footer>
+	<script type="text/javascript">
+		var length=cols*rows //表格单元格数目
+		var map=[] //存储单元格里的内容
+		var user=[] //存储每个单元格是否可以翻开的状态
+		var times=0;
+		var newsatrt;
+		var firstIndex=0,secondIndex=0;//点击第一张、第二张图片的索引
+		var ctr=0;    //记录第几次被点击
+		var finished=0;
+		var preetd=false
+		//var stopTime=false;
+
+		function $(x){
+		 	return document.getElementById(x)
+	    }
+	    for(var i=0;i<length/2;i++){
+	    	map[i]=i;
+	    	map[length/2+i]=i
+	    }
+	    // alert(map)
+	    function init(){
+	    	for (var i=0;i<length;i++){
+	    		$("img"+i).innerHTML=''
+	    		user[i]=0;//是否显示图片，0为显示背面
+	    	}
+	    	// alert(map)
+	    	map.sort(function(){return Math.random()-0.5})
+	    	// alert(map)
+	    	times=0; //计时器变量清零
+	    	$("div1").innerHTML=times+'秒'
+	    	preetd=true
+	    	newsatrt=true; //标记为新开局
+	    }
+	    function showimg(x){
+	    	if (newsatrt) {
+	    		preetd=false
+	    		start()
+	    		newsatrt=false;
+	    	}
+	    	 $("img"+x).innerHTML=map[x]
+	    	
+	    	// alert(x)
+	    	if (ctr==0) {
+	    		ctr++
+	    		firstIndex=x //记录第一张图片索引(位置)
+	    	}else{
+	    		if (firstIndex!=x) {
+	    		secondIndex=x;//记录第二张图片索引
+	    		ctr=0;
+	    		check() 
+	    		}
+	    	}
+	    }
+	    function start(){
+	    	if (preetd==false) {
+	    	times++
+	    	$("div1").innerHTML=times+'秒';
+	    	//if (stopTime) {clearTimeout(st) stopTime=false}
+	    	var st=setTimeout('start()',1000)
+	    	}
+	    }   
+	    function check(){
+	    	if (map[firstIndex]==map[secondIndex]) {
+	    		finished++;
+	    		user[firstIndex]=1;
+				user[secondIndex]=1;//不能再翻
+				//ctr=0;
+	    	}else if(user[firstIndex]==0){
+	    		$('img'+firstIndex).innerHTML='';
+	    		firstIndex=secondIndex;
+	    		secondIndex=0;
+	    		ctr++ //标记已经点击了一张
+	    	}
+	    	timer()
+	    }
+	    function timer() {
+	    	if (finished==length/2) {
+	    		stopTime=true;
+	    		alert('恭喜你配对成功，用时：'+$("div1").innerHTML)
+	    		window.location.reload()
+	    	}
+	    }
+ 	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

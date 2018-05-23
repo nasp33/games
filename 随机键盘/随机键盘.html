@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>随机键盘</title>
+	<style type="text/css">
+		.btn1,.btn2{
+			width: 60px;
+			padding: 5px;
+			border-radius:10px;
+			margin: 5px;
+		}
+		#div{
+			padding-left: 2px 0px;
+			width: 420px;
+			border: 1px orange solid;
+			background: Seashell;
+			text-align: center;
+		}
+		.but3{
+			width: 30px;
+			height: 30px;
+			/*border-radius: 15px;*/
+			margin: 2px;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" class="tex" id="txt">
+	<input type="button" class="btn1" value="清除" onclick="clearnum()">
+	<input type="button" class="btn2" value="重置" onclick="cz()"><br>
+	<div id="div">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+		<input type="button" class="but3" value="">
+	</div>
+	<script>
+	var div=document.getElementById('div')
+	var txt=document.getElementById('txt')
+ 	//打乱数组
+	function ran(){
+		var arr=[0,1,2,3,4,5,6,7,8,9]
+		var radArr=[]
+		for (var i = 0; i < 10; i++) {
+			var num=Math.floor(Math.random()*(10-i))
+			radArr.push(arr[num])
+			arr.splice(num,1)
+		}
+		return radArr
+	}
+	//将数字放进按钮
+	function put(){
+		var ran1=ran()
+		for (var i = 0; i < 10; i++) {
+			div.children[i].value=ran1[i]
+			var btn=div.children[i]
+			btn.onclick=btnClick
+		}
+
+	}
+	put()
+
+	function btnClick(){
+		txt.value+=this.value
+	}
+	function clearnum(){
+			txt.value='';
+	}
+	function cz(){
+	window.location.reload();
+	}
+	</script>
+</body>
+</html>
