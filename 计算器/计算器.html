@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算器</title>
+	<style type="text/css">
+		.div0{
+			width: 620px;
+			height: 330px;
+			border: 5px outset orange;
+			margin: 30px auto;
+			background: #D9D9F3;
+			
+		}
+		#inp{
+			margin:20px 10px 20px 20px;
+			width: 420px;
+			height: 45px;
+			box-shadow: 2px 2px 5px 0px #545454 inset;
+			font-size: 20px;
+			text-align: right;
+			/*direction: rtl;*/
+		}
+		.div1{
+			margin-top: 20px;
+			margin-right: 22px;
+			border:2px solid Gray;
+			width: 130px;
+			height: 45px;
+			padding: 0px 5px;
+			border-radius:2px;
+			float: right;
+		}
+		input[type="button"]{ 
+			width: 55px;
+			height: 36px;
+			background-color: white;
+			border: 2px solid #A8A8A8;
+			border-radius: 3px;
+			box-shadow: 2px 2px 5px 0px #545454 inset
+		}
+		.num-clear{
+			margin: 5px 3px 
+		}
+		#fun,#num{
+			width: 203px;
+			height: 200px;
+			border:2px solid Gray;
+			float: left;
+			margin-top: 15px;
+		}
+		#fun{
+			margin-left: 20px;
+		}
+		#num{
+			margin-left: 10px;
+		}
+		#sum{
+			width: 140px;
+			height: 200px;
+			border:2px solid Gray;
+			float: right;
+			margin-right: 22px;
+			margin-top: 15px;
+		}
+		.fun-btn,.num-btn{
+			margin: 11px 0px 0px 5px;
+		}
+		.sum-btn{
+			margin: 11px 0px 0px 7px;
+		}
+	</style>
+</head>
+<body>
+	<div class="div0">
+		<input type="text" id="inp" value="0">
+		<div class="div1">
+			<input type="button" value="清除" id="clear" class="num-clear" onclick="inp.value='0';result=0">
+			<input type="button" value="退格" class="num-clear" onclick="delLastNum()">
+		</div>
+		<div id="fun">
+			<input type="button" class="fun-btn" value="sin" onclick="math('sin')">
+	     	<input type="button" class="fun-btn" value="cos" onclick="math('cos')">
+	      	<input type="button" class="fun-btn" value="tan" onclick="math('tan')">
+	      	<input type="button" class="fun-btn" value="asin" onclick="math('asin')">
+	      	<input type="button" class="fun-btn" value="acos" onclick="math('acos')">
+	      	<input type="button" class="fun-btn" value="atan" onclick="math('atan')">
+	      	<input type="button" class="fun-btn" value="PI" onclick="math('PI')">
+	      	<input type="button" class="fun-btn" value="1/x" onclick="math('1/x')">
+	      	<input type="button" class="fun-btn" value="EXP" onclick="math('EXP')">
+	      	<input type="button" class="fun-btn" value="Inx" onclick="math('Inx')">
+	      	<input type="button" class="fun-btn" value="lgx" onclick="math('lgx')">
+	      	<input type="button" class="fun-btn" value="n!" onclick="math('n!')">
+		</div>
+		<div id="num">
+			<input type="button" class="num-btn" value="7" onclick="btn1(7)">
+			<input type="button" class="num-btn" value="8" onclick="btn1(8)">
+			<input type="button" class="num-btn" value="9" onclick="btn1(9)">
+			<input type="button" class="num-btn" value="4" onclick="btn1(4)">
+			<input type="button" class="num-btn" value="5" onclick="btn1(5)">
+			<input type="button" class="num-btn" value="6" onclick="btn1(6)">
+			<input type="button" class="num-btn" value="1" onclick="btn1(1)">
+			<input type="button" class="num-btn" value="2" onclick="btn1(2)">
+			<input type="button" class="num-btn" value="3" onclick="btn1(3)">
+			<input type="button" class="num-btn" value="0" onclick="btn1(0)">
+			<input type="button" class="num-btn" value="." onclick="dot()">
+			<input type="button" class="num-btn" value="=" onclick="compute('=')">
+		</div>
+		<div id="sum">
+			<input type="button" class="sum-btn" value="+" onclick="compute('+')">
+			<input type="button" class="sum-btn" value="取整" onclick="quzheng()" >
+			<input type="button" class="sum-btn" value="-" onclick="compute('-')">
+			<input type="button" class="sum-btn" value="取余" onclick="compute('%')" >
+			<input type="button" class="sum-btn" value="*" onclick="compute('*')">
+			<input type="button" class="sum-btn" value="x^y" onclick="compute('x^y')" >
+			<input type="button" class="sum-btn" value="/" onclick="compute('/')">
+			<input type="button" class="sum-btn" value="+/-" onclick="add_minus()">
+		</div>
+	</div>
+
+	<script>
+	var Boo=false  //是否按下运算符号
+	var result=0; //存储计算数据的变量
+    var ope; //存储计算符号的变量
+
+		function $(id) {
+			return document.getElementById(id)
+		}
+		function dot() {
+			var inp=$('inp')
+			if (Boo) {
+				inp.value='0.'
+			}else{
+				if (inp.value.indexOf('.')==-1) {    //检测有输入过'.'则不能再次输入
+				inp.value+='.'   //这个函数为了当第一位数输入0的时候后面如果输入'.'会用+=
+				}
+			}
+			Boo=false
+		}
+		function btn1(Num) {
+			var inp=$('inp')
+			if (Boo) {
+				inp.value=Num //若接受过运算符，文本框清零
+				Boo=false
+			}else{
+				if (inp.value=='0') {
+					inp.value=Num   //用=即后面输入的数字会覆盖前面的数字
+				}else{
+					inp.value+=Num
+				}
+			}
+		}
+		//with 语句可以方便地用来引用某个特定对象中已有的属性
+    	//有时候，我在一个程序代码中，多次需要使用某对象的属性或方法 onclick="math()"
+    	function math(op){
+	     	 var inp=$('inp').value;
+	     	 if (inp==''){alert('数据不能为空')};
+	     	 Boo=true;
+	     	 with(Math){
+	       	 switch(op){    //这里直接填参数即可，因为是一元运算符号，所以不需要存储运算符号
+	          case 'sin':result=sin(inp);break;
+	          case 'cos':result=cos(inp);break;
+	          case 'tan':result=tan(inp);break;
+	          case 'asin':result=asin(inp);break;
+	          case 'acos':result=acos(inp);break;
+	          case 'atan':result=atan(inp);break;
+	          case 'PI':result=PI;break;
+	          case '1/x':result=1/inp;break;
+	          case 'EXP':result=exp(inp);break;
+	          case 'Inx':result=log(inp);break;
+	          case 'lgx':result=log(inp)/log(10);break;
+	          case 'i':result=floor(inp);break;
+	          case 'n!':result=jc(inp);break;
+		      default:result=parseFloat(inp);
+	      }
+	    }
+	       $('inp').value=result;
+	    }
+
+	    function jc(a){
+	      if(a==1){
+	        return 1; 
+	      }else{
+	        return jc(a-1)*a  
+	      }
+	    }
+		function compute(op) {    //op会在onclick中用运算符号+-等符号代替
+			var textInp=$('inp').value;
+			if (textInp=='') {textInp=0};     //只有运算符号触发的时候才生效,在清空那里不生效，所以清空那要填0
+			Boo=true
+			switch(ope){       //不用op是因为程序执行时从上到下会导致填入两个数字在填入运算符号再运算
+				case '+':result+=parseFloat(textInp)
+				break;
+				case '-':result-=parseFloat(textInp)
+				break;
+				case '*':result*=parseFloat(textInp)
+				break;
+				case '/':result/=parseFloat(textInp)
+				break;
+				case '=':result=parseFloat(textInp)
+				break;
+				case '%':result%=textInp
+				break;
+				case 'x^y':result=Math.pow(result,textInp)
+				break;
+				// case 'quzheng':result=parseInt(textInp)
+				// break;
+				default:result=parseFloat(textInp)
+			}
+			$('inp').value=result;    //此处$('inp').value不能写作textInp
+			ope=op      
+		}	
+		function add_minus() {
+			var textInp=$('inp').value;		
+			$('inp').value*=-1
+
+		}
+		function quzheng() {
+			var textInp=$('inp').value;		
+			$('inp').value=parseInt(textInp)
+		}
+		function delLastNum() {
+			var textInp=$('inp')
+			textInp.value=textInp.value.slice(0,textInp.value.length-1)
+			if (textInp.value=='') {textInp.value=0}
+		}
+	</script>
+</body>
+</html>
